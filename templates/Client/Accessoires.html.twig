@@ -1,0 +1,228 @@
+{% extends 'baseClient.html.twig' %}
+{% block stylesheet %}
+<style>
+
+ /*   .changeCol{*/
+
+ /*   background-color: rgba(249,196,154,0.6);*/
+ /*   animation: mymove 2s infinite;*/
+ /* }*/
+
+ /*    @keyframes mymove {*/
+ /*       from {background-color: rgba(249,196,154,0.6);}*/
+ /*       to {background-color:rgba(249,196,154,1);}*/
+ /*}*/
+
+</style>
+
+
+
+
+    <style>
+    .addDisabled{
+        color: dimgrey;
+
+    }
+    .addDisabled:hover{
+    cursor: default;
+    }
+</style>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+
+{% endblock %}
+{% block Title %}Accessoires{% endblock %}
+
+{% block body %}
+
+    <div class="row" style="padding-top: 100px; padding-right: 0em; justify-content: space-between;">
+      <div class="row justify-content-between" style="width: 100%;margin: 0em 3em;">
+
+        <div class="col-xl-5 col-lg-5 col-md-4 col-sm-4 col-xs-12 row justify-content-start">
+        <button class="yeey btn btn-light" {% if not app.user %}disabled {% endif%} onclick="window.location.href='{{ path('panier') }}'">
+           <i class="fas fa-shopping-cart"></i>
+             Panier
+        </button>
+        {% if not app.user %}
+        &nbsp;
+        <a href="{{ path('connexion') }}" style="font-size: 15px ; margin-top: 1.2em">
+            Connectez-Vous
+        </a>
+        <p style="font-size: 15px; margin-top: 1.2em"> &nbsp;pour accéder à votre panier</p>
+        {% endif %}
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-8 col-xs-12 row justify-content-end">
+            <div class="dropdown ">
+                <button class="dropbtn btn btn-light">{{ cat }}</button>
+                <div class="dropdown-content">
+                {% for catt,value in cats %}
+                    {% if catt!=cat %}
+                        {% if catt=='Catégorie' %}
+                             <a href="{{ path('accessoires',{'filtre':filtre,'trier':trier}) }}">Default</a>
+                        {% else %}
+                             <a href="{{ path('accessoires',{'cat':catt,'filtre':filtre,'trier':trier}) }}">{{ catt }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+{#                    <a href="#">Système hydrolique de treuil</a>#}
+{#                    <a href="#">Pompe centrifuge</a>#}
+{#                    <a href="#">Piece de rechange pour moteur</a>#}
+{#                    <a href="#">Ligne d'arbre</a>#}
+{#                    <a href="#">Echangeur de chaleur</a>#}
+{#                    <a href="#">Commande et direction</a>#}
+{#                    <a href="#">boite de vitesse marine</a>#}
+{#                    <a href="#">Alternateur</a>#}
+{#                    <a href="#">Accessoires marin</a>#}
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn btn btn-light">{{ filtre }}</button>
+                <div class="dropdown-content">
+                {% if filtre!='Occasion' %}
+                    <a href="{{ path('accessoires',{'cat':cat,'filtre':'Occasion','trier':trier}) }}">Occasion</a>
+                {% endif %}
+                {% if filtre!='Neuf' %}
+                       <a href="{{ path('accessoires',{'cat':cat,'filtre':'Neuf','trier':trier}) }}">Neuf</a>
+                {% endif %}
+                {% if filtre!='Filtre' %}
+                    <a href="{{ path('accessoires',{'cat':cat,'trier':trier}) }}">Default</a>
+                {% endif %}
+
+                </div>
+            </div>
+            <div class="dropdown" style="margin-right: 0.5em;">
+                <button class="dropbtn btn btn-light">{{ trier }}</button>
+                <div class="dropdown-content">
+                    {% if trier!='Catégorie' %}
+                    <a href="{{ path('accessoires',{'cat':cat,'filtre':filtre,'trier':'Catégorie'}) }}">Catégorie</a>
+                    {% endif %}
+                    {% if trier!='A-Z' %}
+                       <a href="{{ path('accessoires',{'cat':cat,'filtre':filtre,'trier':'A-Z'}) }}">A-Z</a>
+                    {% endif %}
+                    {% if trier!='Trier' %}
+                       <a href="{{ path('accessoires',{'cat':cat,'filtre':filtre}) }}">Default</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-7 col-sm-10 col-xs-12">
+            <form style="margin-top: 0.6em">
+                    <div class="input-group" >
+                        <input id="search" type="text" class="form-control" placeholder="Search" id="search" style="border-radius: 10px 0px 0px 10px">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" style="background-color: white; border: 1px solid #DEE2E6;
+                            border-radius: 0px 10px 10px 0px">
+                                <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+            </form>
+            </div>
+            </div>
+    </div>
+    <section class="row justify-content-center" style="width:100%">
+        <div id="containe" class="container">
+            {% for pd in prod %}
+                <article class="rounded container" id="accesscont" style="padding: 0em">
+                    <div class="row justify-content-end" style="margin: 0.5em">
+
+                        <i  data-target="{{ path('accessoire.ajouter',{'id':pd.id}) }}" class="fas fa-cart-plus {% if not app.user %} addDisabled {% endif%}"></i>
+                       </div>
+                    <div class="col-md-12 details" data-target="{{ path('details.article', {'id' : pd.id}) }}" id="pics">
+
+                        {% set i=0 %}
+                        {% for pic in pd.images %}
+                            {% set i=i+1 %}
+                            {% if i <2 %}
+                                <img
+                                        src="{{ asset('/Uploads/Produits/') ~ pic.getURL() }}"
+                                        class="col-md-9"
+                                        style="padding: 0em 1em;"
+
+                                />
+                            {% endif %}
+                        {% endfor %}
+                        {% if i == 0 %}
+                        <div style="margin: 0em 1em; height: 100%;background-color: beige;">
+                        <i class="fas fa-camera-retro" style="margin : 0.5em; font-size: 2em"></i>
+                        <p style="font-weight: 500;"> Coming Soon..</p>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <p class="details" data-target="{{ path('details.article', {'id' : pd.id}) }}" style="margin-top: 1em;" ><b> {{ pd.nom }}</b></p>
+                    <div class="row col-md-12" style="justify-content: space-between;">
+                        <p id="refaccess" class="col-md-8">#{{ pd.ref }}</p>
+                        <input {% if not app.user %} disabled {% endif%} class="form-control" type="number" value="1" id="example-number-input"
+                               style="margin:1em" >
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+    </section>
+    <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content" id="beh">
+                <div class="modal-form">
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% block footer %}{% endblock %}
+{% endblock %}
+{% block javascripts %}
+
+    <script src="{{ asset('searchArticle.js') }}"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+
+    $('.fa-cart-plus').click(function () {
+
+             $('button.yeey').animate({ backgroundColor : "#FFC107" }, 500 );
+
+
+          setTimeout(function() {
+            $('button.yeey').animate({ backgroundColor : "#f8f9fa" }, 2000);
+          } , 1500);
+
+        const url= $(this).attr('data-target');
+            const qte= $(this).parent().parent().find("input").val();
+            $.ajax({
+                url:url+'/'+qte,
+                method: 'GET',
+            }).done(function() {
+
+            })
+  // f9c49a
+
+
+        })
+
+        $('.details').click(function () {
+            const url1= $(this).attr('data-target');
+            $.get(url1, function (data) {
+                $('.modal-form').html(data);
+                $('#exampleModal').modal();
+            })
+        })
+
+
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+{% block Title %}
+    Rendez-vous
+{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('Rendez-vous.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('myStyle.css') }}">
+
+{% endblock %}
+{% block Body %}
+    <div class="container-fluid my-col10">
+        <div class="row">
+            <div class="col-12">
+                <p class="title">Boats & Cars</p>
+            </div>
+        </div>
+        <div class="row justify-content-around" style="margin-right:7%">
+            <div class="col-3">
+                <a href="{{ path('rendez-vous.ajouter') }}">
+                    <button class="btn my-btn btn-light">Ajouter Rendez-Vous</button>
+                </a>
+            </div>
+            <div class="text col-3">
+                <p>{{ values|length }} Rendez-vous</p>
+            </div>
+            <div class="form-group form-check-inline">
+
+                <div class="input-group col-11">
+                    <input id="search" type="text" class="form-control" placeholder="Chercher..">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row inforow">
+            {% for message in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-10 mytable">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="5">
+                            Rendez-Vous
+                        </th>
+                    </tr>
+                    </thead>
+                    <thead>
+                    <tr>
+                        {% for name,head in headers %}
+                            <th><a style="color: #000000" href="{% if (orderby==head|lower and mode=='DESC') or (orderby!=head|lower) %} {{ path('rendez-vous',{'ORDERBY':head|lower,'MODE':'ASC'}) }} {% else %} {{ path('rendez-vous',{'ORDERBY':head|lower,'MODE':'DESC'}) }} {% endif %} ">{{ name }} {% if orderby==head|lower %} {% if mode=='ASC' %} <i class="fa fa-sort-asc" aria-hidden="true"></i> {% else %} <i class="fa fa-sort-desc" aria-hidden="true"></i> {% endif %} {% endif %} </a></th>
+                        {% endfor %}
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for val in values %}
+                        <tr>
+                            <th>{{ val.client.nom }} {{ val.client.prenom }}</th>
+                            {% if rendezvous==val %}
+                                {{ form_start(form) }}
+                                <td>{{ form_widget(form.date) }}</td>
+                                <td>{{ form_widget(form.heure) }}</td>
+                            {% else %}
+                                <td>{{ val.date|date("d/m/Y") }}</td>
+                                <td>{{ val.heure|date("H:i") }}</td>
+                            {% endif %}
+                            <td>{{ val.client.telephone }}</td>
+                            {% if rendezvous==val %}
+                            <td>
+                                    <input type="image" src="{{ asset('img/savedisk_floppydisk_guardar_1543.png') }}" alt="Submit_Form" style="height: 24px" />
+                                    <a href="{{ path('rendez-vous',{'ORDERBY':orderby,'MODE':mode}) }}">
+                                        <img style="margin-bottom: 18%;" src="{{ asset('img/Cancel_icon-icons.com_73703.png') }}" alt="Cancel_icon">
+                                    </a>
+                            </td>
+                                {{ form_end(form) }}
+                                {% else %}
+                                    <td>
+                                        {% if rendezvous is null %}
+                                            <a href="{{ path('rendez-vous.edit',{'id':val.id,'ORDERBY':orderby,'MODE':mode}) }}">
+                                                <img src="{{ asset('img/1486564724-pencil_81530.png') }}">
+                                            </a>
+                                            <a title="supprimer" href="{{ path('rendez-vous.delete',{id:val.id}) }}">
+                                                <img src="{{ asset('img/4105963-cross-delete-remove_113917.png') }}">
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block Script %}
+<script src="{{ asset('search.js') }}"></script>
+    <script>
+        $('a[title="supprimer"]').click(function () {
+            var com=confirm('Etes vous sur de vouloir supprimer ce Rendez-vous?');
+            if(!com){
+                return false;
+            }
+        })
+
+    </script>
+    {{ parent () }}
+{% endblock %}

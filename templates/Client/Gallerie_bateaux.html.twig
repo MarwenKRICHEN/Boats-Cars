@@ -1,0 +1,106 @@
+{% extends 'baseClient.html.twig' %}
+{% block stylesheet %}
+    <style>
+        .row{
+            height: 100%;
+        }
+    </style>
+{% endblock %}
+{% block Title %}Gallerie{% endblock %}
+
+{% block body %}
+    <!--book mark-->
+    <div class="container col-12 bookMark">
+        <i class="fas fa-home"></i> <i class="fas fa-chevron-right"></i> Services <i class="fas fa-chevron-right"></i> Galerie
+    </div>
+
+    <!--pictures-->
+    <div class="container col-12  " style=" width: 100%;">
+        <div class="row justify-content-center">
+            {% set i=0 %}
+            {% for pic in pics %}
+                {% set i=i+1 %}
+            <a data-toggle="modal" data-target="#modalImage" number="{{ i }}" class="col-xl-2 col-lg-2 col-md-4 galbox boxImage" style="display:block;
+        padding:0;background-image: url({{ asset('Uploads/Bateaux/')~pic }})">
+                <div style=" height:80%; "></div>
+                <div class="view display">
+                    <i class="far fa-eye display" style="color: white; font-size: xx-large; margin: 0.3em"></i>
+                </div>
+            </a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-lg" role="document">
+            <div style="background-color: rgba(0,0,0,0); border: none" class="modal-content">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                        {% set i=0 %}
+                        {% for pic in pics %}
+                            {% set i=i+1 %}
+                            <div style="text-align: center; padding: 1.5em" id="{{ i }}" class="carousel-item">
+                                <img class="d-block w-100"  src="{{ asset('/Uploads/Bateaux/') ~ pic}}" >
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <a class="carousel-control-prev" style="padding: 5px"  href="#carouselExampleControls" role="button" data-slide="prev">
+                        <div class="align-content-center" style="padding: 10px;background-color: rgba(0,0,0,0.6);">
+                            <span style="padding: 12px;margin-top: 5px;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </div>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <div class="align-content-center" style="padding: 10px;background-color: rgba(0,0,0,0.6);">
+                        <span style="padding: 12px;margin-top: 5px;" class="text-black-50 carousel-control-next-icon" aria-hidden="true"></span>
+                        </div>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+   {% block footer %}{% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function () {
+            $('.galbox').click(function () {
+                let imgs=document.querySelectorAll(".carousel-item");
+                imgs.forEach(function (img) {
+                    img.classList.remove("active");
+                })
+                var num = $(this).attr('number');
+                document.getElementById(num).classList.add("active");
+            });
+        });
+
+    </script>
+
+
+    <script>
+        $('a.galbox').mouseenter(function () {
+            $(this).find('.view').fadeIn(500);
+
+        })
+
+        $('a.galbox').mouseleave(function () {
+            $(this).find('.view').hide();
+        })
+
+        $('a.galbox').click(function () {
+
+            $('.blackback').fadeIn(500);
+
+
+        })
+    </script>
+{% endblock %}

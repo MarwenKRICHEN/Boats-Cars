@@ -1,0 +1,91 @@
+.path{
+    background-color: #599DA6;
+    margin-left: 1.8%;
+}
+.path p{
+    color: white;
+    margin-left: 5%;
+    top: 8px;
+    position: relative;
+    font-family: Arial,sans-serif;
+    font-size: 25px;
+}
+.photorow{
+    height: 250px;
+    border: 1px solid black;
+}
+.photocol{
+    height: 100%;
+    margin-left: 20px;
+    background-color: #5a6268;
+}
+#demo {
+    height:100%;
+    position:relative;
+    overflow:hidden;
+}
+
+
+.green{
+    background-color:#6fb936;
+}
+.thumb{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.page-top{
+    margin-top:85px;
+}
+
+
+img.zoom {
+    position: relative;
+    width: auto;
+    height: 200px;
+    border-radius:5px;
+    object-fit:cover;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+}
+img.zoom.img-fluid:hover{
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    transform: scale(1.15);
+}
+
+.add{
+    cursor: pointer;
+    opacity: 85%;
+}
+.add:hover{
+    opacity: 100%;
+}
+.profile-pic {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.edit {
+    /*padding-top: 7px;*/
+    /*padding-right: 7px;*/
+    position: absolute;
+    right: -3px;
+    top: -14px;
+    display: none;
+}
+
+.edit a {
+    color: #000;
+}
+/*.overlay:hover{*/
+/*    top: -14px;*/
+/*    right: -3px;*/
+/*}*/

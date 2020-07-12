@@ -1,0 +1,82 @@
+body{
+
+    position: relative;
+
+
+}
+
+html,body{
+    margin : 0px;
+    min-width: fit-content;
+}
+
+.sideBar{
+    font-family: Arial,sans-serif;
+    box-shadow: 8px 0px 10px #E8E3E3;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 2em;
+    background-color: #334960;
+    min-height:100%;
+    padding-left: 0px;
+    min-width: 250px;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+    position: relative;
+}
+
+.sidebarShrink{
+    min-height:100%;
+    padding: 0em;
+    min-width: 60px;
+    background-color: #334960;
+    box-shadow: 8px 0px 10px #E8E3E3;
+    padding-left: 0px;
+}
+
+.sideBarBar{
+    border-right: 4px solid cadetblue;
+    padding-right: 14px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#active{
+    color: #228B22;
+}
+
+.OpA{
+    margin-left: 2.3em;
+    display: inline;
+
+}
+
+.wrapper{
+    display: flex;
+    min-height: 100vh;
+}
+
+.number{
+    position: absolute;
+    font-size: 0.7em;
+    top: 404px;
+    left: 58px;
+    color:white;
+}
+
+.sideElement{
+    color: #BDBDBD;
+    margin-left:1em;
+}
+
+.sideElement:hover{
+    color: white;
+    margin-left:1em;
+    text-decoration: none;
+}
+
+li ul hr {
+    width: 80%;
+    margin: 1em auto;
+}
+

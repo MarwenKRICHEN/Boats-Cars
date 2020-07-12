@@ -1,0 +1,50 @@
+.my-col10{
+
+	height: 100vh;
+	max-width: 100%;
+	padding-right: 0;
+	margin-right: 0;
+	overflow: scroll;
+	background-color: white;
+	height: 100vh;
+}
+.title{
+	font-family: "Edwardian Script ITC", Arial, Helvetica, sans-serif;
+	font-size: 100px;
+	color: #334960;
+}
+
+p{
+	font-size: 19px;
+	color:#535151;
+}
+.input-group .form-control{
+	width: 25%;
+}
+.block a .fa-sliders{
+	font-size: 1.5em;
+}
+.block .btn{
+	padding: 3px;
+}
+.block a p{
+	display: inline;
+	width: 10%;
+	color: white;
+	padding-left: 5px;
+	margin-bottom: 5px;
+}
+
+.row:nth-of-type(2){
+	margin-bottom: 20px;
+}
+.col-2 .my-btn , .col-3 .my-btn{
+	border-color: #d9d9d9;
+	border-radius: 15px;
+}
+.text p{
+	margin-left: 8%;
+}
+.inforow{
+	margin-left: 4%;
+}

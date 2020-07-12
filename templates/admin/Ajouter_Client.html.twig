@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('Formulaire.css') }}">
+{% endblock %}
+
+{% block Title %}
+    Ajouter Client
+{% endblock %}
+
+{% block Body %}
+    <div class="container-fluid my-form align-self-center">
+        {{ form_start(formClient) }}
+        <div class="row my-row1 justify-content-center">
+            <p>Ajouter un Client</p>
+        </div>
+        {% for message in app.session.flashBag.get('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="row field1">
+            <div class="col-4">
+                <label for="id">CIN :</label>
+            </div>
+            <div class="col-5">
+                {{ form_widget(formClient.cin,{'attr': {'placeholder': 'entrer le n° CIN'}}) }}
+                {{ form_errors(formClient.cin) }}
+{#                <input type="text" name="CIN" placeholder ="entrer le n° CIN" class="form-control">#}
+            </div>
+        </div>
+        <div class="row field2">
+            <div class="col-4">
+                <label for="nom"> Nom :</label>
+            </div>
+            <div class="col-5 ">
+                {{ form_widget(formClient.nom,{'attr': {'placeholder': 'entrer le nom du client'}}) }}
+{#                <input type="text" name="nom" placeholder="entrer le nom du client" class="form-control">#}
+            </div>
+        </div>
+        <div class="row field3">
+            <div class="col-4">
+                <label for="pnom">Prénom :</label>
+            </div>
+            <div class="col-5 ">
+                {{ form_widget(formClient.prenom,{'attr': {'placeholder': 'entrer le prenom du client'}}) }}
+{#                <input type="text" name="pnom" placeholder="entrer le prénom du client" class="form-control">#}
+            </div>
+        </div>
+        <div class="row field4">
+            <div class="col-4">
+                <label for="tel">N° Téléphone :</label>
+            </div>
+            <div class="col-5 ">
+                {{ form_widget(formClient.telephone,{'attr': {'placeholder': 'entrer le n° téléphone'}}) }}
+                {{ form_errors(formClient.telephone) }}
+{#                <input type="text" name="tel" placeholder="entrer le n° téléphone" class="form-control">#}
+            </div>
+        </div>
+        <div class="row buttons justify-content-center ">
+            <div class="col-3 ">
+                <button onclick="window.location.href='{{ path('client')}}'">Annuler</button>
+            </div>
+            <div class="col-3">
+                <button type="submit">Ajouter ></button>
+            </div>
+        </div>
+        {{ form_end(formClient) }}
+    </div>
+{% endblock %}
+{% block Script %}
+    {{ parent() }}
+{% endblock %}

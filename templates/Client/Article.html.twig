@@ -1,0 +1,165 @@
+{% extends 'baseClient.html.twig' %}
+{% block stylesheet %}
+    <style>
+        .card img{
+            height: 13em;
+        }
+        .card{
+            margin-top: 4em;
+            margin-right: 1em;
+            margin-left: 1em;
+        }
+
+        p.nbone{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* number of lines to show */
+            -webkit-box-orient: vertical
+        }
+
+
+
+    </style>
+{% endblock %}
+
+{% block Title %}Article {{ id }}{% endblock %}
+
+{% block body %}
+{% if id == 1  %}
+<header id="pic" style="background-image: url({{ asset('design/BoatOnShore.jpg') }})">
+ {% elseif id == 2 %}
+    <header id="pic" style="background-image: url({{ asset('design/settings.jpg') }})">
+{% elseif id == 3 %}
+        <header id="pic" style="background-image: url({{ asset('design/manInBoat.jpg') }})">
+{% else %}
+            <header id="pic" style="background-image: url({{ asset('design/colorful.jpg') }})">
+ {% endif %}
+
+
+</header>
+
+    <section>
+        {% if id == 1  %}
+            <h1 class="articleTitle"> Le transport n'est plus votre problème </h1>
+            {% elseif id == 2 %}
+                <h1 class="articleTitle"> Réparation,entretien et maintenance </h1>
+                {% elseif id == 3 %}
+                    <h1 class="articleTitle"> Des délais Incroyables </h1>
+                    {% else %}
+                        <h1 class="articleTitle"> Et de la peinture </h1>
+                        {% endif %}
+
+        {% if id == 1  %}
+            <div class="article">
+                <p > Boats & Cars transporte vos monocoques ou multicoques quels que soit leur taille et leur tonnage à travers la Tunisie, grâce à notre méthodologie éprouvée et
+                    nos outils et équipages bien adaptés. Le transport de vos bateaux jusqu'à notre locale est devenu
+                bien plus simple et plus rapide.</p>
+
+                <p>Nous assurons grâce à notre réseau de partenaires toutes les opérations relatives au transport de bateau (démâtage, démontage des apparaux, coconnage, etc …)</p>
+
+                <p> Pour déplacer votre navire ou bateau, il suffit de nous contacter et de nous fournire les informations necessaires
+                pour un transport de qualité, rapide et protegé.</p>
+
+            </div>
+        {% elseif id == 2 %}
+            <div class="article">
+                <p > Boats & Cars vous propose tous types de travaux « sur mesure » d’entretien, réparation, maintenance et refit.</p>
+
+                <p> Dès l’arrivé de votre navire sur site, un chef de projet sera à votre disposition pour vous accompagner et vous conseiller.
+                    L’équipe se tient à votre entière disposition pour vous accompagner dans votre projet et vous adresser devis et cotations vous garantissant le meilleur rapport qualité/prix dans les meilleurs délais.</p>
+
+                <p> Boats & Cars vous offre la liberté de réaliser vous même votre carénage et de faire intervenir sur votre navire tous professionnels de votre choix susceptibles de réaliser tous types de travaux et prestations hormis certain travaux de peinture, sablage, hydrogommage, lustrage qui peuvent être proposés par Boats & Cars ainsi que les travaux de carénage exclusivement réalisés par notre Chantier Naval de Provence si vous ne souhaitez pas les réaliser vous-même</p>
+            </div>
+        {% elseif id == 3 %}
+            <div class="article">
+                <p >Une equipe adequate et bien formée est mobilisée pour chaque vehicule. C'est ainsi que nous assurons que notre produit est fiable et de haute qualité, et que notre service est rapide et fiable. </p>
+
+            </div>
+        {% else %}
+            <div class="article">
+                <p > La mise à terre et le carénage annuel sont un moment important dans la vie de votre bateau.
+                    Cet arrêt technique permet le contrôle des œuvres vives (partie immergée de la coque) et la réalisation d’un certain nombre d’entretiens déterminants pour la sécurité et la longévité de votre bateau. Nos techniciens experts vous conseilleront et vous proposeront la solution la mieux adaptée à vos besoins.</p>
+
+                <p> NOUS VOUS PROPOSONS LES PRESTATIONS SUIVANTES :
+                    <br>
+                    <br>
+                    Nettoyage de la coque à haute pression (partie immergée)
+                    <br>Lavage de la coque (partie émergée)
+                    <br>Décapage des lignes d’arbre, hélices, flaps et embases
+                    <br>Application d’antifouling
+                    <br>Peinture hélices, self-drive, hydrojet
+                    <br>Remplacement des anodes
+                    <br>Lustrage de coque et superstructures
+                    <br>Réfection de la ligne de flottaison
+                    <br>Reprise de rayure ou éclats de gel coat ou de peinture
+                    <br>Remplacement des bagues hydrolubes
+                    <br>Décapage des œuvres vives par hydro-gommage ou sablage de la coque
+                    <br>Traitement préventif ou curatif de l’osmose de la coque
+                    <br>Remplacement des vannes de coque
+
+                </p>
+                <p>Dès l’arrivé de votre navire sur site, un chef de projet sera à votre disposition pour vous accompagner dans la réalisation de votre projet.
+                    Notre équipe est à votre disposition pour vous conseiller et répondre de façon personnalisée à chacun de vos projets. N’hésitez pas à demander votre devis gratuit et personnalisé !</p>
+            </div>
+        {% endif %}
+
+
+    </section>
+            {% endblock %}
+
+
+            {% block footer %}
+                <footer class="row justify-content-around" style="background-color: rgba(0,0,0,0.6);margin-top: 2em; ">
+                  {% if id != 1 %}
+                      <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12" style="display: contents">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ asset('design/BoatOnShore.jpg') }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Le transport n'est plus votre problème</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="{{ path('article', {'id': 1}) }}" class="btn btn-primary">voir plus</a>
+                        </div>
+                    </div>
+                      </div>
+                   {% endif %}
+                    {% if id != 2 %}
+                        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12" style="display: contents">
+                    <div class="card " style="width: 18rem;">
+                        <img class="card-img-top" src="{{ asset('design/settings.jpg') }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Réparation,entretien et maintenance</h5>
+                            <p class="card-text nbone">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="{{ path('article', {'id': 2}) }}" class="btn btn-primary">Voir plus</a>
+                        </div>
+                    </div>
+                        </div>
+                    {% endif %}
+                    {% if id != 3 %}
+                        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12"style="display: contents">
+                    <div class="card " style="width: 18rem;">
+                        <img class="card-img-top" src="{{ asset('design/manInBoat.jpg') }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Des délais Incroyables</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="{{ path('article', {'id': 3}) }}" class="btn btn-primary">Voir plus</a>
+                        </div>
+                    </div>
+                    </div>
+                    {% endif %}
+                    {% if id != 4 %}
+                        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12" style="display: contents">
+                        <div class="card " style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('design/colorful.jpg') }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Et de la peinture</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="{{ path('article', {'id': 4}) }}" class="btn btn-primary">Voir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </footer>
+            {% endblock %}
+
+

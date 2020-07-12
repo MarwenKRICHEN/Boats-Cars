@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{{ asset('Home.css') }}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"/>
+
+    <title>Home</title>
+
+</head>
+<body>
+
+<nav style="height: 50px ; width:100%; background-color: #334960; display: flex;
+    justify-content: flex-end;">
+    <a href="#" class="maPainInTheS" alt="Vous êtes connecté avec: &#10; {{ app.user.email }}">  <i class="fas fa-user-tie little-tie" > </i> </a>
+
+    <div id="changeAccount" style="display:none" >
+        <div style="text-align: center">
+            <i class="fas fa-user-tie" style="font-size: 5em"  > </i>
+            <p style="font-size: 1.2em; margin-top: 1em; font-weight: 500; color: grey">{{ app.user.email }}</p>
+            <a href="{{ path('deconnexion') }}" class="btn btn-outline-success">Déconnexion </a>
+{#            <hr>#}
+{#            {% set i = 0 %}#}
+{#            {% for admin in admins %}#}
+{#                {% if i < 3 %}#}
+{#            <div class="row align-items-center hoverUser" style="margin-bottom: 1em; ">#}
+{#                <i class="fas fa-user-circle" ></i>#}
+{#                <p style="margin-bottom: 0; color: grey"> {{ admin.email }}</p>#}
+{#            </div>#}
+{#                {% endif %}#}
+{#                {% set i= i+1 %}#}
+{#            {% endfor %}#}
+        </div>
+    </div>
+
+</nav>
+<!--page content-->
+<div style="  border-left: 50px solid #334960; min-height: 100vh "  >
+
+
+    <div class="row justify-content-between" style="width: 100%; padding-left:1em">
+        <a  class="navbar-brand col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12" href="{{ path('acceuil') }}" id="logo" style="color:black" >
+            <img src="{{ asset('img/logo.png') }}" style="margin-right: 10px"/>
+            <span id="lgname"> Boats&Cars </span>
+        </a>
+
+        <a class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 weatherwidget-io" href="https://forecast7.com/fr/36d8110d18/tunis/" data-label_1="TUNIS" data-label_2="Météo" data-icons="Climacons Animated" data-mode="Current" data-theme="pure" data-basecolor="rgba(255, 255, 255, 0.3)" >TUNIS Météo</a>
+
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 displayDate" style="margin-bottom: 1.5em;padding: 0;">
+            <h5>{{ "now"|date("d/m/Y") }}</h5>
+        </div>
+    </div>
+
+    <div class="row " style="margin:3em 3em 0 3em">
+        <div class="col-12 row align-items-center">
+            <img src="{{ asset('img/sailor_cup.png') }}" class="sailor">
+
+            <p class="wlcm" style="margin-bottom: 0em" >Bienvenue Capitaine {{ app.user.prenom}}</p>
+
+
+        </div>
+
+        <div class="col-12 row justify-content-around">
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12 my-col2 bord">
+                <a href="{{ path('donnee') }}">
+                    <div>
+                        <img class="boximg" src="{{ asset('img/Donnees_icon.png') }}" alt="icone_donnee">
+                        <p class="boxp">Données</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12 my-col2 bord">
+                <a href="{{ path('factures') }}">
+                    <div>
+                        <img class="boximg" src="{{ asset('img/Facture_icon.png') }}" alt="icone_facture">
+                        <p class="boxp">Factures</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12 my-col2 bord">
+                <a href="{{ path('devis') }}">
+                    <div>
+                        <img class="boximg" src="{{ asset('img/Devis_icon.png') }}" alt="icone_devis">
+                        <p class="boxp">Devis</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12 my-col2 bord">
+                <a href="{{ path('rendez-vous') }}">
+                    <div>
+                        <img class="boximg" src="{{ asset('img/Rendez-Vous_icon.png') }}" alt="icone_rendez_vous">
+                        <p class="boxp" style="font-size: 1.3em">Rendez-vous</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12 my-col2 bord">
+                <a href="{{ path('produit') }}">
+                    <div>
+                        <img class="boximg" src="{{ asset('img/Accessoires_icon.png') }}" alt="icone_accessoires">
+                        <p class="boxp">Produits</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-xs-12 my-col2 bord">
+                <a href="{{ path('galerie') }}">
+                    <div>
+                        <img class="boximg" src="{{ asset('img/Galerie_icon.png') }}" alt="icone_Gallerie">
+                        <p class="boxp">Gallerie</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div style="height: 5px;">
+
+    </div>
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+    $('a i.little-tie').click(function () {
+        $('div#changeAccount').show();
+    })
+
+    $(document).mouseup(function(e)
+    {
+        var container =  $('div#changeAccount');
+
+
+        if (!container.is(e.target) && container.has(e.target).length === 0)
+        {
+            container.hide();
+        }
+    });
+
+</script>
+<script>
+    !function(d,s,id){
+        var js,fjs=d.getElementsByTagName(s)[0];
+        if(!d.getElementById(id))
+        {
+            js=d.createElement(s);
+            js.id=id;
+            js.src='https://weatherwidget.io/js/widget.min.js';
+            fjs.parentNode.insertBefore(js,fjs);
+        }
+    }
+    (document,'script','weatherwidget-io-js');
+</script>
+</body>
+</html>

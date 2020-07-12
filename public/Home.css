@@ -1,0 +1,155 @@
+body{
+
+	position: relative;
+
+
+}
+
+html,body{
+	margin : 0px;
+	min-width: fit-content;
+}
+
+.little-tie{
+	color:white;
+	opacity: 0.8;
+	font-size: 2em;
+
+}
+.little-tie:hover{
+	opacity : 1;
+}
+
+#logo{
+	display:flex;
+	align-items: baseline;
+	height: 60px;
+}
+
+#lgname{
+	font-family: "Edwardian Script ITC";
+	position: relative;
+	top:-10px;
+	font-size: 3em;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+
+
+.maPainInTheS{
+	position: relative;
+	display: inline-block;
+	margin-top: 0.5em;
+	margin-right: 0.5em;
+}
+.fa-user-circle{
+	font-size: 2.5em;
+	margin-right: 0.3em;
+	opacity: 0.7;
+	color: olivedrab;
+
+}
+
+
+
+img.sailor
+{
+	margin-left: 10px;
+	height: 64px;
+	width: 64px;
+	margin-right:1.5em;
+}
+
+.hoverUser:hover{
+
+	background-color:lightgoldenrodyellow;
+}
+#changeAccount{
+
+	position: absolute;
+	padding: 2em;
+	top: 1.5em;
+	right: 2em;
+	z-index: 99;
+	border-radius: 10px;
+	border: 1px solid darkgrey;
+	background-color: white;
+
+}
+.maPainInTheS:hover:before{
+	content: attr(alt);
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	position: absolute;
+	padding: 1em;
+	z-index: 99;
+	left: -15em;
+	top: 1.5em;
+	color: #333333;
+	font-weight: bold;
+	width: 15em;
+	background-color:ghostwhite;
+
+}
+.displayDate{
+	align-self: flex-end;
+	color: #334960
+;
+}
+
+p.wlcm{
+	font-family: Arial;
+	font-size: 25px;
+	color: #334960;
+}
+@media all and (max-width: 768px) {
+
+	.displayDate{
+		display:none;
+	}
+}
+
+.my-col2 a:hover{
+	text-decoration: none;
+}
+
+.my-col2
+{
+	margin-top: 2em;
+	margin-right:1em;
+	height: 161px;
+	border-top: solid 10px #334960;
+	border-left: solid 10px #334960;
+	border-bottom: solid 10px #C8C8C8;
+	border-right: solid 10px #C8C8C8;
+	background-color: #C8C8C8;
+}
+
+.boximg
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.boxp
+{
+	text-align: center;
+	font-size: 28px;
+	font-family: Comic Sans MS;
+	margin: 0;
+	color: #334960;
+}
+
+
+.my-col2
+{
+	color: #334960;
+}
+
+.bord:hover
+{
+	border-right: solid 10px #334960;
+	border-bottom: solid 10px #334960;
+}

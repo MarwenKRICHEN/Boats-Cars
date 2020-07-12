@@ -1,0 +1,17 @@
+.table{
+    background-color: #fff;
+}
+.table thead tr th:nth-of-type(even){
+    background-color: #4EBD9C;
+    color:white;
+}
+.table thead tr th:nth-of-type(odd){
+    background-color: #334960;
+    color:white;
+}
+.mytable{
+    margin-left: 4%;
+}
+.my-col10{
+    background-color: #EAE7E7;
+}

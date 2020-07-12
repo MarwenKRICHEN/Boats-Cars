@@ -1,0 +1,57 @@
+.table thead:nth-of-type(1) tr th{
+    background-color: #599DA6;
+    color: white;
+    font-size: 20px;
+}
+
+.green{
+    color: green; font-size:1.5em;
+}
+
+.red{
+    color: darkred; font-size:1.5em;
+}
+
+
+.mytable{
+    margin-left: 4%;
+}
+.my-col10 img{
+    height: 30px;
+    width: 30px;
+    display: inline; /* remove extra space below image */
+    margin-left: 5px;
+    padding: 2px;
+}
+.table tr img:nth-of-type(1){
+    height: 35px;
+    width: 35px;
+    margin-left: 0px;
+}
+
+.my-col10 img:hover{
+    cursor: pointer;
+}
+.table{
+    background-color: #F1F1F1;
+}
+.table tr:nth-of-type(even) td:nth-of-type(6) img{
+    border: 1px #F1F1F1 solid;
+}
+.table tr:nth-of-type(even) td:nth-of-type(6) img:hover{
+    border: 1px black solid;
+}
+.table tr:nth-of-type(odd) td:nth-of-type(6) img{
+    border: 1px #e5e5e5 solid;
+}.table tr:nth-of-type(odd) td:nth-of-type(6) img:hover{
+    border: 1px black solid;
+}
+.table td:nth-of-type(1) img:hover{
+     cursor: default;
+ }
+.table .modify td:nth-of-type(1) img:hover{
+    cursor: pointer;
+}
+/*.table th{*/
+/*    width: 25%;*/
+/*}*/

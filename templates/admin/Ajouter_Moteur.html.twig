@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('Formulaire.css') }}">
+{% endblock %}
+
+{% block Title %}
+    Ajouter Moteur
+{% endblock %}
+
+{% block Body %}
+    <div class="container-fluid my-form align-self-center">
+        {{ form_start(formMoteur) }}
+            <div class="row my-row1 justify-content-center">
+                <p>Ajouter un moteur</p>
+            </div>
+            <div class="row field1">
+                <div class="col-4">
+                    <label for="id">N° de série :</label>
+                </div>
+
+                <div class="col-5">
+                    {{ form_widget(formMoteur.num_series,{'attr': {'placeholder': 'entrer le n° de serie'}}) }}
+                </div>
+            </div>
+            <div class="row field2">
+                <div class="col-4">
+                    <label for="marque"> Marque :</label>
+                </div>
+                <div class="col-5 ">
+                    {{ form_widget(formMoteur.marque,{'attr': {'placeholder': 'entrer la marque'}}) }}
+                </div>
+            </div>
+            <div class="row field3">
+                <div class="col-4">
+                    <label for="nbCh"> Nbre de cheveaux :</label>
+                </div>
+                <div class="col-5 ">
+                    {{ form_widget(formMoteur.nBCheveaux,{'attr': {'placeholder': 'entrer le nombre de cheveaux'}}) }}
+                </div>
+            </div>
+            <div class="row field3">
+                <div class="col-4">
+                    <label > Telephone  :</label>
+                </div>
+                <div class="col-5 ">
+                    {{ form_widget(formMoteur.owner,{'attr': {'placeholder': 'telephone'}}) }}
+                </div>
+            </div>
+
+            <div class="row buttons justify-content-center ">
+                <div class="col-3 " >
+                    <button onclick="window.location.href='{{ path('moteur')}}'">Annuler</button>
+                </div>
+                <div class="col-3">
+                    <button type="submit">Ajouter ></button>
+                </div>
+            </div>
+
+
+        {{ form_end(formMoteur) }}
+    </div>
+{% endblock %}
+{% block Script %}
+    {{ parent() }}
+{% endblock %}

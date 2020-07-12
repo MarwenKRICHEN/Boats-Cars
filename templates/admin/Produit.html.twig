@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+{% block Title %}
+    Produit
+{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{{ asset('Produit.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('myStyle.css') }}">
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+
+{% endblock %}
+{% block Body %}
+<div class="container-fluid my-col10">
+
+    <div class="row">
+        <div class="col-12">
+            <p class="title">Boats & Cars</p>
+        </div>
+    </div>
+
+
+    <div class="row align-items-start">
+        <div class="col-2">
+            <a href="{{ path('produit.ajouter') }}">
+                <button style="margin-left: 30%" class="btn my-btn btn-light">Ajouter Produit</button>
+            </a>
+        </div>
+        <div class="text col-2">
+            <p>{{ Produits|length }} Produits </p>
+        </div>
+
+        <div class="input-group col-3">
+            <input id="search" type="text" class="form-control" placeholder="Chercher..">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row inforow">
+        {% for message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-10 mytable">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th colspan="7">
+                        Produit
+                    </th>
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    {% for name,head in headers %}
+                        <th><a style="color: #000000" href="{% if (orderby==head|lower and mode=='DESC') or (orderby!=head|lower) %} {{ path('produit',{'ORDERBY':head|lower,'MODE':'ASC'}) }} {% else %} {{ path('produit',{'ORDERBY':head|lower,'MODE':'DESC'}) }} {% endif %} ">{{ name }} {% if orderby==head|lower %} {% if mode=='ASC' %} <i class="fa fa-sort-asc" aria-hidden="true"></i> {% else %} <i class="fa fa-sort-desc" aria-hidden="true"></i> {% endif %} {% endif %} </a></th>
+                    {% endfor %}
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for Produit in Produits %}
+                <tr>
+                    <th>{{ Produit.ref }}</th>
+
+                 {% if Produit.disponible %}
+                     {% set icon = "fas fa-check-circle green" %}
+                 {% else %}
+                     {% set icon = "fas fa-times-circle red" %}
+                 {% endif %}
+
+                    <td><a href="#" class="changeMe"><i data-target="{{ path('produit.dispo' , {'id' : Produit.id}) }}" class="{{ icon }}"  ></i> </a></td>
+                    <td>{{ Produit.nom }}</td>
+                    <td>{{ Produit.cat}}</td>
+                    <td>{{ Produit.prix}}</td>
+                    {% if Produit.neuf  %}
+                    <td> neuf </td>
+                    {% else %}
+                        <td> occasion </td>
+                    {% endif %}
+
+                    <td>
+              <a data-toggle="modal" class="Update"
+                        data-target="{{ path('images.edit',{'id': Produit.id}) }}" title="voir images">
+                            <img src="{{ asset('img/eye-1_icon-icons.com_58901.png') }}">
+                        </a>
+                        <a href="{{ path('produit.edit', {'id' : Produit.id }) }}" title="modifier"><img src="{{ asset('img/1486564724-pencil_81530.png') }}"></a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content" id="beh">
+                <div class="modal-header" id="beh">
+                    <h5 class="modal-title" id="exampleModalLabel">Images choisies</h5>
+                    <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-form">
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block Script %}
+    {{ parent() }}
+    <script src="{{ asset('search.js') }}"></script>
+
+    <script src="{{ asset('Produit-edit.js') }}"></script>
+    <script>
+
+        $('.Update').click(function () {
+            const url1= $(this).attr('data-target');
+            $.get(url1, function (data) {
+                $('.modal-form').html(data);
+                $('#exampleModal').modal();
+            })
+        })
+        imgs = document.querySelectorAll(".table tr td a i");
+
+        imgs.forEach(function (img) {
+
+            img.addEventListener("click", function () {
+
+                const url = img.getAttribute('data-target');
+
+                $.ajax({
+                    method: 'GET',
+                    url: url
+
+                }).done(function (msg) {
+
+                    console.log(msg.dispo);
+
+                    if (msg.dispo) {
+                        img.classList.remove("fas", "fa-times-circle", "red");
+                        img.classList.add("fas", "fa-check-circle", "green")
+
+                    } else {
+                        img.classList.remove("fas", "fa-check-circle", "green");
+                        img.classList.add("fas", "fa-times-circle", "red");
+
+                    }
+
+
+                })
+             }) })
+
+
+    </script>
+
+{% endblock %}

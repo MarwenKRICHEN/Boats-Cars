@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styling.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        .fixed-top.scrolled {
+            background-color: #fff !important;
+            transition: background-color 200ms linear;
+        }
+    </style>
+
+    {% block stylesheet %}
+
+    {% endblock %}
+
+    <title>{% block Title %}{% endblock %}</title>
+</head>
+<body style="background-color: #f2f2f2;"  id={% block body_id %}{% endblock %}>
+
+  {% block navbar %}  {{ include('includes/navbar.html.twig') }} {% endblock %}
+
+{% block body %}
+{% endblock %}
+
+
+
+
+{% block footer %}
+    <footer id="footer" style="text-align: center;">
+        <a href="#pic" id="back">Up</a>
+    </footer>
+{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init(
+            {
+                duration: 1000,
+            }
+        );
+
+
+        $(document).scroll(function () {
+            var $nav = $(".fixed-top");
+            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        });
+
+        $('i.fa-user-circle').click(function () {
+
+
+            var ww= window.innerWidth;
+
+           // if(ww >= 992 ){
+                $('div#changeAccount').show();
+          //  }
+
+
+        })
+
+        $(document).mouseup(function(e)
+        {
+            var container =  $('div#changeAccount');
+
+
+            if (!container.is(e.target) && container.has(e.target).length === 0)
+            {
+                container.hide();
+            }
+        });
+
+
+  // $("#lgname").click(function () {
+  //     var cansee = $('#navbarSupportedContent').is(':visible');
+  //     alert(cansee);
+  // })
+
+
+    </script>
+
+
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+    ></script>
+
+{% block javascripts %}
+{% endblock %}
+</body>
+</html>

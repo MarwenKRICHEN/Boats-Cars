@@ -1,0 +1,258 @@
+{% extends 'baseClient.html.twig' %}
+{% block stylesheet %}
+<style>
+    #demandeDevis {
+        background: url({{ asset('design/shipback.jpg') }});
+        min-height: 426px;
+        background-size: cover;
+        background-position-y: center;
+    }
+
+    .sections{
+
+        background-image: url({{ asset('design/shipback.jpg') }});
+        background-position: center;
+        background-size: cover;
+    }
+
+
+</style>
+{% endblock %}
+{% block Title %}Acceuil{% endblock %}
+
+{% block body %}
+
+    <header id="pic" style="background-image: url({{ asset('design/joseph-barrientos-eUMEWE-7Ewg-unsplash.jpg') }})">
+
+
+        <div id="insc" class="col-10 col-sm-10" data-aos="fade-up">
+            <h1 style="padding-top: 30%;" class="exp">
+                Vivre l'experience complete
+            </h1>
+
+             {% if not app.user %}
+            <a
+                    href="{{ path('inscription')}}"
+                    class="btn btn-outline-light"
+                    style="margin-left: 75px;">
+
+                Inscrivez-vous
+
+            </a>
+            {% else %}
+                <a
+                        href="{{ path('gallerie.bateaux') }}"
+                        class="btn btn-outline-light"
+                        style="margin-left: 83px;">
+
+                    Galerie
+
+                </a>
+
+            {% endif %}
+        </div>
+    </header>
+
+    <!--Page Content-->
+
+    <div class="sections">
+        <!--first section-->
+        <section class="row justify-content-center" style="background: rgba(255,255,255,0.9)">
+            <div class="col-12 mainTitle" style="text-align: center;" >
+                <h1> Qui Somme Nous ? </h1>
+            </div>
+            <div class="col-12">
+                <hr>
+            </div>
+            <article class="col-md-8 col-sm-9 firstArticle"  >
+                <h5> CHANTIER NAVAL : VOTRE NAVIRE, NOS ENGAGEMENT </h5>
+                <p>
+                    Situé à la Sokra, notre Chantier naval et boutique d'accessoire est à votre disposition 7 jours/ 7.
+                    Plusqu'un chantier naval, on assure la bonne qualitée et le suivi des navires et 4x4. Notre equipe
+                    veille à ce que vous n'obtenez que les meilleurs services.
+                </p>
+
+                <b>
+                    Délais, Qualité, Rigueur, Sécurité,
+                </b>
+                <br />
+                Budget Chantier Naval de la Sokrq s’est doté des outils et moyens de
+                manutention les plus modernes et les plus performants pour assurer le
+                levage et le calage de tous type de navires (jusqu’à 100 tonnes, 35
+                mètres de long et 10 mètres de large) et en particulier les
+                multicoques et catamarans dans le plus grand respect de l’architecture
+                de ce types de navires.
+                </p>
+            </article>
+
+        </section>
+        <section class="row" id="emplacement" style="background: rgba(255,255,255,0.9)">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="align-items: center; display: flex;">
+
+                <a  data-aos="fade-right" class="map"
+                    href="https://www.google.tn/maps/dir//36.8609306,10.2141358/@36.8643918,10.205071,15.58z/data=!4m2!4m1!3e0?hl=fr"
+                    title="allez-y!"
+                >
+                    <img  src="{{ asset('design/Capture.PNG') }}" id="position"  />
+                    <h5 id="locationname" class="col-12" style="padding-left: 0.7em" >La soukra</h5>
+
+                </a>
+
+            </div>
+
+            <article class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="align-self: center; padding:4em ">
+
+                <h1 data-aos="fade-up" id="ouSommesnous">Retrouvez nous sur place</h1>
+                <hr />
+                <p>
+                    Notre aire de carénage et de stationnement à flot et à sec,
+                    parfaitement close, est surveillée 24h/24h par des agents portuaires
+                    assermentés. Le site de Chantier Naval de Provence est également
+                    équipé d’un système de vidéo protection doublé d’un dispositif de
+                    détection de mouvement destiné à prévenir toute intrusion intempestive
+                    sur zone.
+                </p>
+            </article>
+        </section>
+    </div>
+
+    <section class="row justify-content-around" id="demandeDevis">
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="align-self: center; padding: 6em">
+            <h3 style="font-weight: bold; font-size: 35px; color: white;">
+                Demandez un devis sur nos produits
+            </h3>
+            <p style="color: white">
+                {% if not app.user %}
+                    Il suffit de se connecter a votre compte et les ajouter a votre panier
+                    . N'hésitez pas , c'est gratuit!
+                {% else %}
+                    Il suffit d'accéder à nos Produits , remplir votre panier .. <br> et demander votre devis
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 row justify-content-around" style="align-self: center; padding: 4.5em; ">
+            {% if not app.user %}
+                <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-xs-6" style="text-align: center;padding-bottom: 1.5em">
+
+                    <a href="{{ path('connexion')}}" class="btn btn-outline-light">
+                        Se connecter
+                    </a>
+
+                </div>
+                <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-xs-6" style="text-align: center">
+
+                    <a class="btn btn-outline-light" href="{{ path('inscription')}}" >
+                        S'inscrire
+                    </a>
+                </div>
+            {% else %}
+                <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-xs-6" style="text-align: center;padding-bottom: 1.5em">
+
+                    <a href="{{ path('accessoires')}}" class="btn btn-outline-light">
+                        Accessoires
+                    </a>
+
+                </div>
+                <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-xs-6" style="text-align: center">
+
+                    <a class="btn btn-outline-light" href="{{ path('panier')}}" >
+                        Mon Panier
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section  class="row justify-content-around" style="align-self: center; padding: 2em ;">
+        <article class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12" style="padding: 2em">
+            <div class="row justify-content-center text-center" style="height:3em;  align-items: center">
+                <div class="col-5 "  style="height: 90%;">
+                    <hr style="vertical-align: middle"/>
+                </div>
+
+                <div class="col-2" style="padding:0px;height: 100%" >
+                    <a href="{{ path('services') }}">
+                        <img  data-aos="flip-left" src="{{ asset('design/Check.png') }}" class="icons"/>
+                    </a>
+                </div>
+
+
+                <div class="col-5 "  style="height: 90%">
+                    <hr/>
+                </div>
+            </div>
+
+
+            <p class="text">
+                <a href="{{ path('services') }}" style="text-decoration: none">
+                    <b>Un service de qualité</b>
+                </a>
+                <br />
+                <br />
+                Loyauté,responsabilité, conscience professionelle font parties de nos
+                engagements.
+            </p>
+        </article>
+
+        <article class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12" style="padding: 2em">
+            <div class="row justify-content-center text-center" style="height:3em;  align-items: center">
+                <div class="col-5 "  style="height: 90%;">
+                    <hr style="vertical-align: middle"/>
+                </div>
+
+                <div class="col-2" style="padding:0px;height: 100%" >
+                    <a href="{{ path('gallerie.bateaux') }} ">
+                        <img  data-aos="flip-left" src="{{ asset('design/polaroid.png') }}" class="icons"/>
+                    </a>
+                </div>
+
+
+                <div class="col-5 "  style="height: 90%">
+                    <hr/>
+                </div>
+            </div>
+
+            <p class="text">
+                <a href="{{ path('gallerie.bateaux') }}"  style="text-decoration: none">
+                    <b>Accédez a Nos Galeries</b>
+                </a>
+                <br />
+                <br />
+                Ou que vous soyez , vous serez capable d'aquérir une meilleure vue de
+                notres activités
+            </p>
+        </article>
+
+
+        <article class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12" style="padding: 2em">
+            <div class="row justify-content-center text-center" style="height:3em;  align-items: center">
+                <div class="col-5 "  style="height: 90%;">
+                    <hr style="vertical-align: middle"/>
+                </div>
+
+                <div class="col-2" style="padding:0px;height: 100%" >
+                    <img data-toggle="modal" data-target="#exampleModalCenter"  data-aos="flip-left" src="{{ asset('design/telephone.png') }}" class="icons"/>
+                </div>
+
+
+                <div class="col-5 "  style="height: 90%">
+                    <hr/>
+                </div>
+            </div>
+
+            <p class="text">
+                <a href="" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: none">
+                    <b>Contactez-nous</b>
+                </a>
+                <br />
+                <br />
+                Pour un rendez-vous ou pour plus d'information, on vous garantie une
+                reponse dans 24h!
+            </p>
+        </article>
+    </section>
+
+{% endblock %}

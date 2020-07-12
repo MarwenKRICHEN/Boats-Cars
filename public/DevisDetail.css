@@ -1,0 +1,31 @@
+.my-col10 .mytext p{
+    font-size: x-large;
+    color: black;
+    font-family: "Arial", sans-serif;
+    margin-left: 10px;
+}
+.my-col10{
+    background-color: #D2CFCF;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: white;
+}
+.table-striped tbody tr:nth-of-type(even){
+    background-color: #EBF3F6;
+}
+.table-striped thead{
+    background-color: #178097;
+    color: white;
+}
+.table-striped thead tr th{
+    border-right: 2px solid white;
+    width: 25%;
+}
+.btn{
+    background-color: #178097;
+    border-color: #178097;
+    border-radius: 20px;
+}
+.my-col10 .row:nth-of-type(4){
+    height: 50px;
+}

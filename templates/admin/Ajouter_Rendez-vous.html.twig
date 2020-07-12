@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('Formulaire.css') }}">
+{% endblock %}
+
+{% block Title %}
+    Ajouter Rendez Vous
+{% endblock %}
+
+{% block Body %}
+    <div class="container-fluid my-form align-self-center">
+        {{ form_start(formRendez) }}
+            <div class="row my-row1 justify-content-center">
+                <p>Ajouter un rendez-vous</p>
+            </div>
+            <div class="row field1">
+                <div class="col-3">
+                    <label for="CIN">CIN du Client :</label>
+                </div>
+                <div class="col-5">
+                    {{ form_widget(formRendez.client,{'attr':{'placeholder':'entrer le CIN du client'}}) }}
+{#                    {{ form_errors(formRendez.client) }}#}
+{#                    <input type="text" name="CIN" placeholder ="entrer le CIN du client" class="form-control">#}
+                </div>
+            </div>
+            <div class="row field2">
+                <div class="col-3">
+                    <label for="date"> Date :</label>
+                </div>
+                <div class="col-9">
+                    {{ form_widget(formRendez.date,{'attr':{'placeholder':'entrer la date'}}) }}
+{#                    <input type="text" name="Date" placeholder="entrer la date " class="form-control">#}
+                </div>
+            </div>
+            <div class="row field3">
+                <div class="col-3">
+                    <label for="heure"> Heure :</label>
+                </div>
+                <div class="col-5 ">
+                    {{ form_widget(formRendez.heure,{'attr':{'placeholder':'entrer l heure'}}) }}
+{#                    <input type="text" name="heure" placeholder="entrer l'heure'" class="form-control">#}
+                </div>
+            </div>
+            <div class="row buttons justify-content-center align-items-end">
+                <div class="col-3 ">
+                    <button onclick="window.location.href='{{ path('rendez-vous')}}'">Annuler</button>
+                </div>
+                <div class="col-3">
+                    <button type="submit">Ajouter ></button>
+                </div>
+            </div>
+        {{ form_end(formRendez) }}
+    </div>
+{% endblock %}
+{% block Script %}
+    {{ parent() }}
+{% endblock %}

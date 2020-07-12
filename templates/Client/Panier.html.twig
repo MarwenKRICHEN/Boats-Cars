@@ -1,0 +1,108 @@
+{% extends 'baseClient.html.twig' %}
+{% block stylesheet %}
+
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+        div#containe .rounded.container.art{
+            margin-right: 0;
+            width: min-content;
+            min-width: 160px;
+            text-align: center;
+            background-color: white;
+            display: inline-grid;
+            max-height: fit-content;
+        }
+    </style>
+{% endblock %}
+{% block Title %}Panier{% endblock %}
+
+{% block body %}
+
+    <div class="row" style="padding-top: 100px; padding-right: 0em; justify-content: space-between;">
+      
+          <h4 style="margin-left: 100px; color: #333333; font-size: 50px;">
+              Mon Panier
+          </h4>
+        <div style="text-align: end; margin: 50px; margin-top: 5px;">
+            <a href="{{ path('panier.envoyer') }}" class="btn btn-warning {% if products|length == 0 %} disabled {% endif %}">Demande Devis</a>
+        </div>
+    </div>
+    {% for message in app.session.flashBag.get('success') %}
+        <div style="margin-left: 80px;width: 100%;color: #333333; font-size: 25px;" class="col-10 alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% if products|length==0 %}
+        <div class="alert alert-light col-10" style="margin-left: 80px;width: 100%;color: #333333; font-size: 25px;" role="alert">
+            Ajouter des produits au panier ..
+        </div>
+    {% endif %}
+    <section class="row" style="width:100%">
+            <div id="containe" style="width: 100%; max-width: 100%;" class="container justify-content-start">
+                {% for commande in products %}
+                    {% set pd=commande['product'] %}
+                    <article class="rounded container art" style="padding: 0em; margin-left: 4em; margin-bottom: 1em; min-width: 250px">
+                        <div class="row justify-content-end" style="margin: 0.5em"><a href="{{ path('panier.delete',{'id':pd.id}) }}"><i class="fas fa-lg fa-times-circle"></i></a></div>
+                        <div class="col-md-12 details" data-target="{{ path('details.article', {'id' : pd.id}) }}" id="pics">
+
+                            {% set i=0 %}
+                            {% for pic in pd.images %}
+                                {% set i=i+1 %}
+                                {% if i <2 %}
+                                    <img
+                                            src="{{ asset('/Uploads/Produits/') ~ pic.getURL() }}"
+                                            class="col-md-9"
+                                            style="padding: 0em 1em;"
+
+                                    />
+                                {% endif %}
+                            {% endfor %}
+                            {% if i == 0 %}
+                                <div style="margin: 0em 1em; height: 100%;background-color: beige;">
+                                    <i class="fas fa-camera-retro" style="margin : 0.5em; font-size: 2em"></i>
+                                    <p style="font-weight: 500;"> Coming Soon..</p>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        <p class="details" style="margin-top: 1em;" ><b> {{ pd.nom }}</b></p>
+                        <p><b>{{ pd.cat }}</b></p>
+                        <p><b> {% if pd.neuf==1 %}Neuf{% else %}Occasion{% endif %}</b></p>
+                        <div class="row col-md-12 align-items-center" style="justify-content: space-between;">
+                            <p id="refaccess" class="col-md-8">#{{ pd.ref }}</p>
+                            <div class="row">
+                                <div class="col-6"><input class="form-control" type="number" value="{{ commande['qte'] }}" id="example-number-input"
+                                                          style="margin:1em" ></div>
+                                <div style="display: flex" class="col-6 align-items-center"> <button data-target="{{ path('accessoire.modifier',{'id':pd.id}) }}" class="btn btn-warning modifer">Modifier</button></div>
+                            </div>
+
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+
+        </section>
+
+
+
+    {% block footer %}
+    {% endblock %}
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('.modifer').click(function () {
+            const url= $(this).attr('data-target');
+            const qte= $(this).parent().parent().find("input").val();
+            $.ajax({
+                url:url+'/'+qte,
+                method: 'GET',
+            }).done(function() {
+                alert("le produit a été modifié avec succés")
+            })
+        })
+    </script>
+{% endblock %}

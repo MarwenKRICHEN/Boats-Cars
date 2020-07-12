@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('Formulaire.css') }}">
+{% endblock %}
+{% block Title %}
+    Ajouter Factures
+{% endblock %}
+{% block Body %}
+    <div class="container-fluid my-form align-self-center">
+        {{ form_start(formFactures) }}
+        <div class="row my-row1 justify-content-center">
+            <p>Ajouter une facture</p>
+        </div>
+        <div class="row field1">
+            <div class="col-3">
+                <label for="CIN">Client :</label>
+            </div>
+            <div class="col-5">
+                {{ form_widget(formFactures.client,{'attr': {'placeholder': 'azertyudfgh'}}) }}
+                {{ form_errors(formFactures.client) }}
+            </div>
+        </div>
+        <div class="row field2">
+            <div class="col-3">
+                <label for="montant"> Montant :</label>
+            </div>
+            <div class="col-5 ">
+                {{ form_widget(formFactures.montant,{'attr': {'placeholder': 'entrer le montant'}}) }}
+                {{ form_errors(formFactures.montant) }}
+            </div>
+        </div>
+        <div class="row buttons justify-content-center ">
+            <div class="col-3 ">
+                <a href="{{ path('factures') }}">
+                    <button type="button">Annuler</button>
+                </a>
+            </div>
+            <div class="col-3">
+                <button type="submit">Ajouter ></button>
+            </div>
+        </div>
+        {{ form_end(formFactures) }}
+
+    </div>
+{% endblock %}
+{% block Script %}
+    {{ parent() }}
+{% endblock %}

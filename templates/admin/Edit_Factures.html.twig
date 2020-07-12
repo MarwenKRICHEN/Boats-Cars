@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+{% block Title %}
+    Factures
+{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('myStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Factures.css') }}">
+
+{% endblock %}
+{% block Body %}
+    <div class="container-fluid my-col10">
+        <div class="row">
+            <div class="col-12">
+                <p class="title">Boats & Cars</p>
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="text col-2">
+                <p style="margin-left: 40%">666 Factures</p>
+            </div>
+            <div class="col-2">
+                <a href="{{ path('facture.ajouter') }}">
+                    <button class="btn my-btn btn-light">Ajouter Facture</button>
+                </a>
+            </div>
+            <div class="input-group col-3">
+                <input type="text" class="form-control" placeholder="Chercher..">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="filter col-2">
+                <select class="form-control">
+                    <option>Chercher par</option>
+                </select>
+            </div>
+        </div>
+        <div class="row inforow">
+            {% for message in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-10 mytable">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="5">
+                            Factures
+                        </th>
+                    </tr>
+                    </thead>
+                    <thead>
+                    <tr>
+                        <th>Num Facture</th>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Montant</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for facture in factures %}
+                        {% if facture.id == id %}
+                        <tr>
+                            {{ form_start(formFacturesEdit) }}
+                            <th>{{ facture.id }}/20</th>
+                            <td>{{form_widget(formFacturesEdit.date)}}</td>
+                            <td>{{ facture.client.nom }} {{ facture.client.prenom }}</td>
+                            <td>{{form_widget(formFacturesEdit.montant)}}</td>
+                            <td>
+
+                                <input type="image" src="{{ asset('img/savedisk_floppydisk_guardar_1543.png') }}" alt="Submit_Form" style="height: 24px;margin-top: 5px" />
+
+                                <a href="{{ path('factures') }}">
+                                    <img style="margin-bottom: 18%;" src="{{ asset('img/Cancel_icon-icons.com_73703.png') }}" alt="Cancel_icon">
+                                </a>
+                            </td>
+                            {{ form_end(formFacturesEdit) }}
+                        </tr>
+                        {% else %}
+                            <tr>
+                                <th>{{ facture.id }}/20</th>
+                                <td>{{ facture.date | date('d/m/Y') }}</td>
+                                <td>{{ facture.client.nom }} {{ facture.client.prenom }}</td>
+                                <td>{{facture.montant}} dt</td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block Script %}
+    {{ parent() }}
+{% endblock %}

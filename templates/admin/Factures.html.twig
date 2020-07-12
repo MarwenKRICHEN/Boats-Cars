@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block Title %}
+    Factures
+{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('myStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Factures.css') }}">
+{% endblock %}
+{% block Body %}
+    <div class="container-fluid my-col10">
+        <div class="row">
+            <div class="col-12">
+                <p class="title">Boats & Cars</p>
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col-2">
+                <a href="{{ path('facture.ajouter') }}">
+                    <button class="btn my-btn btn-light" style="margin-left: 30%">Ajouter Facture</button>
+                </a>
+            </div>
+            <div class="text col-3">
+                <p style="margin-left: 40%">{{ factures|length }} Factures</p>
+            </div>
+            <div class="input-group col-3">
+                <input id="search" type="text" class="form-control" placeholder="Chercher..">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row inforow">
+            {% for message in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-10 mytable">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="5">
+                            Factures
+                        </th>
+                    </tr>
+                    </thead>
+                    <thead>
+                    <tr>
+                        {% for name,head in headers %}
+                            <th><a style="color: #000000" href="{% if (orderby==head|lower and mode=='DESC') or (orderby!=head|lower) %} {{ path('factures',{'ORDERBY':head|lower,'MODE':'ASC'}) }} {% else %} {{ path('factures',{'ORDERBY':head|lower,'MODE':'DESC'}) }} {% endif %} ">{{ name }} {% if orderby==head|lower %} {% if mode=='ASC' %} <i class="fa fa-sort-asc" aria-hidden="true"></i> {% else %} <i class="fa fa-sort-desc" aria-hidden="true"></i> {% endif %} {% endif %} </a></th>
+                        {% endfor %}
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for facture in factures %}
+                        <tr>
+                            <th>{{ facture.id }}/20</th>
+                            <td>{{ facture.date | date('d/m/Y') }}</td>
+                            <td>{{ facture.client.nom }} {{ facture.client.prenom }}</td>
+                            <td>{{facture.montant}} dt</td>
+                            <td>
+                                <a href="{{ path('factures.edit',{'id':facture.id}) }}">
+                                    <img src="{{ asset('img/1486564724-pencil_81530.png') }}">
+                                </a>
+                                <a title="supprimer" href="{{ path('factures.delete',{'id':facture.id}) }}">
+                                    <img  src="{{ asset('img/4105963-cross-delete-remove_113917.png') }}">
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block Script %}
+    <script src="{{ asset('search.js') }}"></script>
+    <script>
+        $('a[title="supprimer"]').click(function () {
+            var com=confirm('Etes vous sur de vouloir supprimer ce moteur?');
+            if(!com){
+                return false;
+            }
+        })
+    </script>
+
+    {{ parent() }}
+{% endblock %}

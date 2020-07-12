@@ -1,0 +1,160 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('Formulaire.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+ <style>
+     .hidden{
+         display: none;
+     }
+ </style>
+{% endblock %}
+
+{% block Title %}
+    Ajouter Produit
+{% endblock %}
+
+{% block Body %}
+    <div class="container-fluid my-form align-self-center">
+        {{ form_start(formProduit )}}
+        <div class="row my-row1 justify-content-center">
+            <p>Ajouter un produit</p>
+        </div>
+        <div class="row my-row2">
+            <div class="col">
+                <div class="row field1">
+                    <div class="col-5">
+                        <label for="Ref">Référence :</label>
+                    </div>
+                    <div class="col-7">
+                        {{form_widget(formProduit.ref , { attr : {'placeholder' : 'Entrer la référence du produit'} })}}
+                        {{ form_errors(formProduit.ref) }}
+                    </div>
+                </div>
+                <div class="row field2">
+                    <div class="col-5">
+                        <label for="Lib"> Libellé :</label>
+                    </div>
+                    <div class="col-7 ">
+                        {{form_widget(formProduit.nom , { attr : {'placeholder' : 'Entrer le libéllé'} })}}
+                    </div>
+                </div>
+                <div class="row field3">
+                    <div class="col-5">
+                        <label for="prix"> Prix :</label>
+                    </div>
+                    <div class="col-7 ">
+                        {{form_widget(formProduit.prix , { attr : {'placeholder' : 'Entrer le prix'} })}}
+                    </div>
+                </div>
+                <div class="row field4">
+                    <div class="col-5">
+                        <label for="cat"> Catégorie :</label>
+                    </div>
+                    <div class="col-7 ">
+                        {{form_widget(formProduit.cat)}}
+                    </div>
+                </div>
+                {% if (New) %}
+                    <div class="row field4" style="margin-bottom: 0px">
+
+
+
+                        <div class="col-5">
+                            <label for="Lib"> Photos :</label>
+                        </div>
+
+                        <br>
+                        <div class="col-11" style="margin-left:1em">
+                            <div class="row">
+                                <div class="col-10">
+                                    {{ form_widget(formProduit.image1) }}
+                                </div>
+                                <div class="col-2 my-auto">
+                                    <i class="fas fa-plus-circle" style="font-size: 2em ; color: #38f6a7;"></i>
+                                </div>
+
+                            </div>
+                            <div class="row hidden" >
+                                <div class="col-10">
+                                    {{ form_widget(formProduit.image2) }}
+                                </div>
+                                <div class="col-2 my-auto">
+                                    <i class="fas fa-plus-circle" style="font-size: 2em ; color: #38f6a7;"></i>
+                                </div>
+
+                            </div>
+                            <div class="row hidden">
+                                <div class="col-10">
+                                    {{ form_widget(formProduit.image3) }}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="field5" style="margin-top: 0px" >
+                    {{ form_widget(formProduit.neuf, { attr : {'class': 'row justify-content-around neuf' }}) }}
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row buttons justify-content-center ">
+            <div class="col-3 ">
+                <button onclick="window.location.href='{{ path('produit')}}' ">Annuler</button>
+            </div>
+            <div class="col-3">
+                <button type="submit" >Ajouter ></button>
+            </div>
+        </div>
+        {{ form_end(formProduit)}}
+
+
+    </div>
+{% endblock %}
+
+{% block Script %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+    <script>
+        {% if New == false %}
+        $('form').css('min-height', '35em');
+        {% else %}
+        $('form').css('min-height', '40em');
+        {% endif %}
+        $('.custom-file-label').html('Choisissez une image.');
+        $('.custom-file-label').css("color" , 'grey');
+
+        $(".custom-file-input").on("change", function() {
+
+            var fileName = $(this).val().split("\\").pop();
+
+            if(fileName.length > 30)
+                fileName = fileName.substr(0,30) +"...";
+
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        var  i=1;
+        $('.fa-plus-circle').click(function () {
+            var ch = $('form').height();
+            console.log(ch);
+            ch += 65*i;
+            i++;
+            console.log(ch);
+            $('form').css('min-height', ch +'px');
+            $(this).css('display','none');
+            $(this).parent().parent().next().removeClass('hidden');
+
+        })
+
+    </script>
+    {{ parent() }}
+{% endblock %}
+

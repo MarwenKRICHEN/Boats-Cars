@@ -1,0 +1,61 @@
+<div class="sideBar">
+    <ul class="list-unstyled"  >
+        <li>
+            <ul class="list-unstyled">
+
+                <li style="text-align: center; margin-bottom: 3em;">
+                    <a href="{{ path('home') }}">
+                        <img src="{{ asset('img/anchor_icon-icons.com_51232.png') }}"  class="hideable" style=" width: 3em"/>
+                    </a>
+                </li>
+
+
+
+                <li class="OpA">
+                    <img src="{{ asset('img/avatar_man_people_person_profile_user_icon_123385.png') }}" style="width: 1.7em; ">
+                    <a href="#" class="sideElement hideable" > {{ app.user.nom}} </a>
+                </li>
+                <hr>
+                <li class="OpA" {% if i==1 %}id="activeli"{% endif %}>
+                    <img src="{{ asset('img/3592836-base-data-document-office-page-paper_107782.png') }}" style="width: 1.7em; ">
+                    <a href="{{ path('donnee') }}" class="sideElement hideable" {% if i==1 %}id="active"{% endif %}> Données </a>
+                </li>
+                <hr >
+                <li class="OpA"  {% if i==2 %}id="activeli"{% endif %}>
+                    <img src="{{ asset('img/bank_bill_finance_invoice_money_payment_receipt_icon_123239.png') }}" style="width: 1.7em; ">
+                    <a href="{{ path('factures') }}" class="sideElement hideable" {% if i==2 %}id="active"{% endif %}> Factures </a>
+                </li>
+                <hr >
+                <li class="OpA" {% if i==3 %}id="activeli"{% endif %}>
+                    <img src="{{ asset('img/administrative_tools_15497.png') }}" style="width: 1.7em; ">
+                    <a href="{{ path('produit') }}" class="sideElement hideable" {% if i==3 %}id="active"{% endif %}> Produits </a>
+                </li>
+                <hr>
+                <li class="OpA" {% if i==4 %}id="activeli"{% endif %}>
+                    <img src="{{ asset('img/Appointment_Reminders-80_icon-icons.com_57378.png') }}" style="width: 1.7em; ">
+
+                    <a href="{{ path('devis') }}" class="sideElement hideable" {% if i==4 %}id="active"{% endif %}> Devis </a>
+                    <p class="number" data-target="{{ path('devis.cal') }}">
+                        1
+                    </p>
+
+                </li>
+                <hr>
+                <li class="OpA" {% if i==5 %}id="activeli"{% endif %}>
+                    <img src="{{ asset('img/time_clock_timer_appointment_icon_131244.png') }}" style="width: 1.7em; ">
+                    <a href="{{ path('rendez-vous') }}" class="sideElement hideable" {% if i==5 %}id="active"{% endif %} > Rendez-Vous </a>
+                </li>
+                <hr>
+                <li class="OpA" {% if i==6 %}id="activeli"{% endif %}>
+                    <img src="{{ asset('img/gallery.png') }}" style="width: 1.7em; ">
+                    <a href="{{ path('galerie') }}" class="sideElement hideable"  {% if i==6 %}id="active"{% endif %}> Gallerie </a>
+                </li>
+                <br>
+            </ul>
+        </li>
+
+
+    </ul>
+
+
+</div>

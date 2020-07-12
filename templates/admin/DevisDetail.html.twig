@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block Title %}
+    Details Devis
+{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('myStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('DevisDetail.css') }}">
+
+{% endblock %}
+
+{% block Body %}
+    <div class="container-fluid my-col10">
+        <div class="row">
+            <div class="col-12">
+                <p class="title">Boats & Cars</p>
+            </div>
+        </div>
+        <div class="row justify-content-center mytext">
+            <p>Demande de devis :</p> <p style="color: #1F8A60"> {{ contenus[0].devis.client.nom }} {{ contenus[0].devis.client.prenom }} </p> <p> le {{ contenus[0].devis.date|date("d/m/Y") }}</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Reference Produit</th>
+                        <th scope="col">Nom Produit</th>
+                        <th scope="col">Categorie</th>
+                        <th scope="col">Quantité</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for contenu in contenus %}
+                    <tr>
+                        <th>{{ contenu.produit.ref }}</th>
+                        <td>{{ contenu.produit.nom }}</td>
+                        <td>{{ contenu.produit.cat }}</td>
+                        <td>{{ contenu.quantite }}</td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <a href="mailto:{{ contenus[0].devis.client.email }}">
+            <button type="button" class="btn btn-primary">Répondre <i class="fa fa-reply"></i></button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+{% block Script %}
+    {{ parent() }}
+{% endblock %}
+

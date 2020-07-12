@@ -1,0 +1,115 @@
+{% block stylesheet %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+{% endblock %}
+{{ form_start(form,{'action' : path('images.edit',{'id' : id}) })}}
+<div class="modal-body">
+    {% set i=0 %}
+    {% for item in images %}
+        {%   set i=i+1 %}
+            <div style="text-align: center; padding: 1.5em">
+
+                    <img src="{{ asset('/Uploads/Produits/') ~ item.getURL()}}" style="border: 0.5px solid #495057 ; margin: 1em ; height: 10em; width: 10em ; border-radius: 5px ;">
+
+                {{ form_widget(form.children['image' ~ i] )}}
+            </div>
+    {% endfor %}
+    {% if images|length < 1 %}
+    <h5 style="opacity: 0.7; text-align: center; margin-bottom: 1.5em">Aucune image correspondante à ce produit</h5>
+    <div class="row">
+        <div class="col-10">
+            {{ form_widget(form.image1) }}
+        </div>
+        <div class="col-2 my-auto">
+            <i class="fas fa-plus-circle" style="font-size: 2em ; color: #38f6a7;"></i>
+        </div>
+
+    </div>
+    <div class="row" style="display: none; margin-top: 20px">
+        <div class="col-10">
+            {{ form_widget(form.image2) }}
+        </div>
+        <div class="col-2 my-auto">
+            <i class="fas fa-plus-circle" style="font-size: 2em ; color: #38f6a7;"></i>
+        </div>
+
+    </div>
+    <div class="row " style="display: none">
+        <div class="col-10">
+            {{ form_widget(form.image3) }}
+        </div>
+
+    </div>
+    {% elseif  images|length == 1%}
+        <hr>
+        <p style="opacity: 0.7; font-size: 1.5em ; ">Ajouter des images</p>
+    <div class="row"  >
+        <div class="col-10">
+            {{ form_widget(form.image2) }}
+        </div>
+        <div class="col-2 my-auto">
+            <i class="fas fa-plus-circle" style="font-size: 2em ; color: #38f6a7;"></i>
+        </div>
+
+    </div>
+    <div class="row " style="display: none">
+        <div class="col-10">
+            {{ form_widget(form.image3) }}
+        </div>
+
+    </div>
+    {% elseif images|length == 2 %}
+        <hr>
+        <p style="opacity: 0.7; font-size: 1.5em ; ">Ajouter des images</p>
+    <div class="row ">
+        <div class="col-10">
+            {{ form_widget(form.image3) }}
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary confirmed">Enregistrer </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+</div>
+{{ form_end(form) }}
+{% block Script %}
+
+    <script>
+
+        console.log("clix");
+
+    $('.custom-file-label').html('Modifier l\'image.');
+    $('.custom-file-label').css('text-align', 'left');
+
+        $(".custom-file-input").on("change", function() {
+
+            var fileName = $(this).val().split("\\").pop();
+
+            if(fileName.length > 20)
+                fileName = fileName.substr(0,20) +"...";
+
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        var  i=1;
+        $('.fa-plus-circle').click(function () {
+            //var ch = $('form').height();
+            //ch += 65*i;
+            //i++;
+            //console.log(ch);
+            //$('form').css('min-height', ch +'px');
+            $(this).css('display','none');
+            $(this).parent().parent().next().css('display','-webkit-inline-box');
+
+        })
+
+    </script>
+{% endblock %}

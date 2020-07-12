@@ -1,0 +1,57 @@
+{% extends 'baseClient.html.twig' %}
+{% block stylesheet %}
+    <style>
+        #main {
+            background: grey no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block Title %}Login{% endblock %}
+
+{% block body_id %}"main"{% endblock %}
+
+
+{% block body %}
+    {% block navbar %}{% endblock %}
+    <div class="container rounded " id="connexiondiv" style="width:35%">
+    <div class="row " style="height: 50%;">
+        <div class="col-12  text-center">
+            <h3 id="ins"> Profil </h3>
+            <h3 style="font-family: Gabriola, Arial, sans-serif"> Modifier votre profil </h3>
+        </div>
+
+        {{ form_start(formUser, { attr : { 'style' : 'margin: 1.5em; margin-bottom: 1em ; width:100%' ,'class' : 'row'} }) }}
+{#        <form class="row"  method="post" style="margin: 1.5em; width: 100%; margin-bottom: 1em">#}
+           <div class="col-12 ">
+               {{  form_row(formUser.nom , { attr: { 'placeholder' : 'Entrer votre Nom'  }}) }}
+
+               {{  form_row(formUser.prenom , { attr: { 'placeholder' : 'Entrer votre Prénom'  }}) }}
+
+               {{  form_row(formUser.telephone ,{ attr: { 'placeholder' : '+216 00 000 000'  }}) }}
+
+               {{  form_row(formUser.cin ,  { attr: { 'placeholder' : 'Entrer votre CIN'  } , 'label' : 'CIN'}) }}
+
+               {{  form_row(formUser.password ,  { attr: { 'placeholder' : 'Modifier le mot de passe'  } , 'label' : 'Mot de passe '}) }}
+
+               {{  form_row(formUser.confirm_password ,  { attr: { 'placeholder' : 'Confirmer le nouveau mot de passe '  } , 'label' : 'Confirmation '}) }}
+
+               <div class="col-12 text-center " style="width: 100%">
+                    <button type="submit" class="btn btn-dark col-2 " style="min-width: 40%; margin-top: 1.5em;"> Continuer </button>
+                </div>
+
+            </div>
+       {{ form_end(formUser)}}
+
+
+{#        <div class="container" style="margin: 1em">#}
+{#            <div class="row justify-content-center ">#}
+{#                <p >Vous n'avez pas un compte ? </p>#}
+{#                <a href="{{ path('inscription') }}" alt="" title="connectez-vous"> Inscrivez-vous.</a>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+
+    {% block footer %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,46 @@
+.boxImage{
+
+    box-shadow: 0px 2px 4px gray;
+}
+
+.boxArticle{
+
+    background-color: white;
+    padding:2em;
+    z-index: 1;
+    box-shadow: 0px 2px 4px gray;
+
+}
+.left-col{
+    overflow: hidden ;
+    height:20em ;
+    margin-right:-15em;
+    /*margin-bottom: -2em;*/
+}
+
+.right-col{
+    overflow: hidden ;
+    height:20em ;
+    margin-left:-15em;
+    margin-bottom: -2em ;
+    z-index: 0.5;
+}
+
+@media all and (max-width: 768px) {
+    .left-col{
+        overflow: hidden ;
+        height:20em ;
+        margin-right:0em;
+        margin-bottom: 2em;
+    }
+
+    .right-col{
+        overflow: hidden ;
+        height:20em ;
+        margin-left:0em;
+        margin-bottom: 2em ;
+
+    }
+
+
+}

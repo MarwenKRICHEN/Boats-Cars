@@ -1,0 +1,149 @@
+{% extends 'baseClient.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/ServicesBoxes.css') }}">
+{% endblock %}
+
+{% block Title %}Services{% endblock %}
+
+{% block body %}
+
+    <header id="pic" style="background-image: url({{ asset('design/pinkportnt.jpg') }})">
+        <div id="insc" class="col-10 col-sm-10" data-aos="fade-up">
+            <h1 style="padding-top: 30%;" class="exp">
+                Nos traveaux parlent de nous.
+            </h1>
+
+            <a
+                    href="{{ path('gallerie.bateaux') }}"
+                    class="btn btn-outline-light"
+                    style="margin-left: 83px;">
+
+                Galerie
+
+            </a>
+        </div>
+    </header>
+
+    <!--Page Content-->
+    <div class="container padding" style="margin-top: 3em">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h3 class="display-4">Nos Services</h3>
+                <hr>
+
+                <p class="lead"> On vous propose des traveaux d'entretien, réparation, maintenance et refis. </p>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+    <div class="container padding">
+        <div class="row padding align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 my-col left-col" data-aos="fade-right">
+
+                <img src="{{ asset('design/BoatOnShore.jpg') }}" class="img-fluid boxImage" >
+
+            </div>
+
+            <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 boxArticle my-col"  >
+                <div class="container">
+                    <h3>
+                        Le transport n'est plus votre problème
+                    </h3> <br/>
+
+                    <p>
+                        Ne vous en meler plus, Boats&cars s'en charge en vous offrant un transport et un suivi jusqu'au bout ..
+                    </p>
+
+                    <a href="{{ path('article', {'id': 1}) }}" alt="" style="color:dimgrey"> Voir plus <i class="fas fa-arrow-right"></i> </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br> <br>
+    <br>
+    <br>
+    <div class="container padding">
+        <div class="row padding align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 order-lg-12 order-md-12 my-col right-col " data-aos="fade-left" >
+
+                <img src="{{ asset('design/settings.jpg') }}" class="img-fluid boxImage">
+
+            </div>
+
+            <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 order-lg-2 order-md-2 boxArticle my-col " >
+                <div class="container">
+                    <h3>
+                        Reparation ,entretien et maintenance..
+                    </h3> <br/>
+
+                    <p>
+                        Durable plus que jamais ..  </p>
+
+                    <a href="{{ path('article', {'id': 2}) }}" alt="" style="color:dimgrey"> Voir plus <i class="fas fa-arrow-right"></i> </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br> <br> <br> <br>
+    <div class="container padding">
+        <div class="row padding align-items-center justify-content-center" >
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 my-col left-col" data-aos="fade-right">
+
+                <img src="{{ asset('design/manInBoat.jpg') }}" class="img-fluid boxImage">
+
+            </div>
+
+            <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 boxArticle my-col" >
+                <div class="container">
+                    <h3>
+                        Des délais Incroyables..
+                    </h3> <br/>
+
+                    <p>
+                        Et bien..Incroyabes!    </p>
+
+                    <a href="{{ path('article', {'id': 3}) }}" alt="" style="color:dimgrey"> Voir plus <i class="fas fa-arrow-right"></i> </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br> <br>
+    <div class="container padding">
+        <div class="row padding align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 order-lg-12 order-md-12 my-col right-col " data-aos="fade-left" >
+
+                <img src="{{ asset('design/colorful.jpg') }}" class="img-fluid boxImage">
+
+            </div>
+
+            <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 order-lg-2 order-md-2 boxArticle my-col " >
+                <div class="container">
+                    <h3>
+                        Et de la peinture aussi..
+                    </h3> <br/>
+
+                    <p>
+                        Apres tout..on est des artistos .. </p>
+
+                    <a href="{{ path('article', {'id': 4}) }}" alt="" style="color:dimgrey"> Voir plus <i class="fas fa-arrow-right"></i> </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+{% endblock %}

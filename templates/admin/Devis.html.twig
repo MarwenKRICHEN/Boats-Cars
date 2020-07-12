@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+{% block Title %}
+    Devis
+{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('myStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('Devis.css') }}">
+
+{% endblock %}
+{% block Body %}
+    <div class="container-fluid my-col10">
+        <div class="row">
+            <div class="col-12">
+                <p class="title">Boats & Cars</p>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-5">
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ header }}
+                    </button>
+                    <div class="dropdown-menu">
+                        {%  for head,table in headers %}
+                            {% if head!=header %}
+                                <a class="dropdown-item" href="{{ path('devis',{'HEADER':head,'ORDERBY':table[0],'MODE':table[1]}) }}">{{ head }}</a>
+                            {% endif %}
+                        {% endfor %}
+{#                        <a class="dropdown-item" href="">Plus Ancient</a>#}
+{#                        <a class="dropdown-item" href="#">Non lus</a>#}
+{#                        <a class="dropdown-item" href="#">Lus</a>#}
+{#                        <a class="dropdown-item" href="#">Non repondus</a>#}
+{#                        <a class="dropdown-item" href="#">Repondus</a>#}
+                    </div>
+                </div>
+
+            </div>
+            <div class="input-group col-3">
+                <input id="search" type="text" class="form-control" placeholder="Chercher..">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="container ">
+        {% for devis in devises %}
+        <div class="row justify-content-center">
+            <div class="row align-items-center col-10">
+                <div class="col-1 align-middle">
+                    {% if devis.done %}
+                        <i data-target="{{ path('devis.done',{'id':devis.id}) }}" class="fa fa-2x fa-check-circle checked" style="font-weight: 900"></i>
+                    {% else %}
+                        <i data-target="{{ path('devis.done',{'id':devis.id}) }}" class="fa fa-2x fa-check-circle"></i>
+                    {% endif %}
+
+                </div>
+                <div class="col-8">
+                    <p class="cont {% if devis.seen == false %}seen" {% endif %}>Demande de devis :<i class="nomprenom" style="font-style: normal"> {{ devis.client.nom }} {{ devis.client.prenom }} le {{ devis.date |date('d/m/Y') }}</i></p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xl-3 col-sm-12 col-xs-12">
+                    <a style="text-decoration: none; color: black" href="{{ path('devis.detail',{'id':devis.id}) }}">
+                        <div class="col-10" >
+                            <p class="cont{% if devis.seen == false %} seen {% endif %} " >Voir plus</p>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}
+
+{% block Script %}
+    <script>
+        $("input#search").keyup(function() {
+            var input = $(this);
+            $('i.nomprenom').each(function () {
+                if($(this).text().toLowerCase().indexOf(input.val().toLowerCase()) > -1 ) {
+                    $(this).parent().parent().parent().parent().show();
+                }else{
+                    $(this).parent().parent().parent().parent().hide();
+                }
+            })
+        })
+    </script>
+    <script>
+        icons=document.querySelectorAll(".fa-check-circle");
+        icons.forEach(function (icon) {
+            icon.addEventListener("click",function () {
+                const url=icon.getAttribute("data-target");
+                $.ajax({
+                    method: 'GET',
+                    url: url
+                }).done(function (msg) {
+                    icon.classList.toggle("checked");
+
+                })
+
+
+            })
+        })
+        let seemores=document.querySelectorAll("a div.col-10 p.cont");
+        seemores.forEach(function (seemore) {
+            seemore.addEventListener("mousedown",function () {
+                console.log("hello");
+                seemore.classList.remove("seen");
+                seemore.parentElement.parentElement.parentElement.parentElement.querySelector(".cont").classList.remove("seen");
+            })
+        })
+
+    </script>
+
+    {{ parent() }}
+{% endblock %}
